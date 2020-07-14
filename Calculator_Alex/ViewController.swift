@@ -9,7 +9,7 @@
 import UIKit
 
 class ViewController: UIViewController{
-  //resullabel
+  //resulLabel
   @IBOutlet weak var resulLabel: UILabel!
   //numbers
   @IBOutlet weak var number0: UIButton!
@@ -35,23 +35,19 @@ class ViewController: UIViewController{
   @IBOutlet weak var operatorDivision: UIButton!
     
     //variables
-    var total:Double = 0;// Total
-    var temp:Double = 0;//Valor por pantalla
-    var operating = false//Indicar si se ha seleccionado un operador
-    var decimal = false // Indicar si el valor es decimal
-    var operation: OperationType = .none //Operacion actual
-    //constantes
-    private let kDecimalSeparator = Locale.current.decimalSeparator!
-    private let kMaxLength = 9
-    private let kTotal = "total"
-    enum OperationType {
-        case none, sum, substraction, multiplication, division ,percent
-    }
+    
+    var numb1:Double = 0;
+    var oper = ""
+    var numb2:Double = 0;
+    var result:Double = 0.0
+    var selecOper = false
+                   
+   
     override func viewDidLoad() {
         super.viewDidLoad()
-       // textView.text = "80\n80"
+       // resultLabel.text = "80\n80"
         
-        
+       // resulLabel = "" + .Tite
         
      // UI
         number0.round()
@@ -74,11 +70,40 @@ class ViewController: UIViewController{
         operatorSubtraction.round()
         operatorMultiplication.round()
         operatorDivision.round()
+   
+    }
+    @IBAction func numbers(_ sender: UIButton) {
+        resulLabel.text = resulLabel.text! + (sender.titleLabel?.text!)!
+        print(resulLabel)
+        
         
     }
+    @IBAction func operations(_ sender: UIButton) {
+        if sender.titleLabel?.text == "="{
+            numb2 = Double(resulLabel.text!) ?? 0.0
+            if oper == "+"{
+                result = numb1 + numb2
+                resulLabel.text = String(result)
+            }
+        }
+        else{
+           numb1 = Double(resulLabel.text!) ?? 0.0
+            resulLabel.text = ""
+            oper = sender.titleLabel!.text!
+        }
+        
+        
+        print("numb1")
+        print(numb1)
+        print("numb2")
+        print (numb2)
+    }
+}
+
      // Button Actions
-    @IBAction func operatorACAction(_ sender: UIButton) {
+    /*@IBAction func operatorACAction(_ sender: UIButton) {
         sender.shine()
+        
     }
     @IBAction func operatorPlusMinusAction(_ sender: UIButton) {
         sender.shine()
@@ -91,48 +116,67 @@ class ViewController: UIViewController{
     }
     @IBAction func operatorSumAction(_ sender: UIButton) {
         sender.shine()
+        resulLabel.text = "+";
     }
     @IBAction func operatorSubstractionAction(_ sender: UIButton) {
         sender.shine()
+        resulLabel.text = "-";
     }
     @IBAction func operatorMultiplicationtAction(_ sender: UIButton) {
         sender.shine()
+        resulLabel.text = "*";
+        operation = sender.tag
+        performingMath = true;
     }
     @IBAction func operatorDivisionAction(_ sender: UIButton) {
         sender.shine()
+        resulLabel.text = "/";
+        operation = sender.tag
+        performingMath = true;
+        
     }
     @IBAction func numberDecimalAction(_ sender: UIButton) {
         sender.shine()
     }
     @IBAction func numberAction(_ sender: UIButton){
         sender.shine()
-        print(sender.tag)
+        
     }
-    //Limpia los valores
-    /*private func clear() {
-        if operation == .none {
-            total = 0
+        
         }
-        operation = .none
-        operatorAC.setTitle("AC", for: .normal)
-        if temp != 0 {
-            temp = 0
-            resulLabel.text = "0"
-        } else {
-            total = 0
-            result()
-        }
-    }*/
+   
+  
+   
     
+    /*func result() {
     
-    
-    
-    
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
+    switch operation {
+
+    case .none:
+        break
+    case .sum:
+        total = total + temp
+        break
+    case .substraction:
+        total = total - temp
+        break
+    case .multiplication:
+        total = total * temp
+        break
+    case .division:
+        total = total / temp
+        break
+    case .percent:
+        temp = temp / 100
+        total = temp
+        break
     }
+}*/
+*/
+    
+
+    
 
 
-}
+
 
