@@ -33,12 +33,8 @@ class ViewController: UIViewController{
   @IBOutlet weak var operatorMultiplication: UIButton!
   @IBOutlet weak var operatorDivision: UIButton!
   //variables
-  var numb1:Double = 0;
-  var oper = ""
-  var numb2:Double = 0;
   var result:Double = 0.0
-  var selecOper = false
-  
+  var contador = 0
   func chargeNumbersUI(){
         number0.round()
         number1.round()
@@ -62,17 +58,51 @@ class ViewController: UIViewController{
         resulLabel.text = ""
     }
     
-    func operations (_ num1:Double,_ num2:Double,_ operan: String)->Double{
-        if oper == "+"{
+    func arrayNum()->[String]{
+        let numberSet = CharacterSet.whitespacesAndNewlines.union(.symbols).union(.punctuationCharacters).union(.letters)
+        let componentsNumber = resulLabel.text.components(separatedBy: numberSet)
+        let numbers = componentsNumber.filter { !$0.isEmpty }
+        return numbers
+    }
+    func arraySymb()->[String]{
+        let symbolSet = CharacterSet.whitespacesAndNewlines.union(.decimalDigits)
+        let componentsSymbols = resulLabel.text.components(separatedBy: symbolSet)
+        let operandos = componentsSymbols.filter { !$0.isEmpty }
+        return operandos
+    }
+    func calculoTotal(){
+        var numbers = arrayNum()
+        var operandos = arraySymb()
+        if contador != 0{
+            let range =  numbers.startIndex...numbers.index(numbers.startIndex, offsetBy: contador)
+            numbers.removeSubrange(range)
+            let range2 = operandos.startIndex...operandos.index(operandos.startIndex, offsetBy: contador-1)
+            operandos.removeSubrange(range2)
+        }
+        contador = operandos.count
+        for index in 0...operandos.count-1{
+            if index == 0{
+                result = operations(Double(numbers[index]) ?? 0.0, Double(numbers[index+1]) ?? 0.0, operandos[index])
+            }
+            else{
+                result = operations(result, Double(numbers[index+1]) ?? 0.0, operandos[index])
+            }
+        }
+        resulLabel.text = resulLabel.text + "\n" + String(format: "%.0f", result)
+        result = 0.0
+    }
+    
+    func operations (_ num1: Double,_ num2: Double,_ operan: String)->Double{
+        if operan == "+"{
             return num1 + num2
         }
-        else if oper == "-"{
+        else if operan == "-"{
             return num1 - num2
         }
-        else if oper == "x"{
+        else if operan == "x"{
             return num1 * num2
         }
-        else if oper == "/"{
+        else if operan == "/"{
             return num1 / num2
         }
         else{
@@ -91,37 +121,13 @@ class ViewController: UIViewController{
     
     @IBAction func operations(_ sender: UIButton) {
         if sender.titleLabel?.text == "="{
-            let numberSet = CharacterSet.whitespacesAndNewlines.union(.symbols)
-            let componentsNumber = resulLabel.text.components(separatedBy: numberSet)
-            let numbers = componentsNumber.filter { !$0.isEmpty }
-            let symbolSet = CharacterSet.whitespacesAndNewlines.union(.decimalDigits)
-            let componentsSymbols = resulLabel.text.components(separatedBy: symbolSet)
-            let operandos = componentsSymbols.filter { !$0.isEmpty }
-            if oper == "+"{
-                result = numb1 + numb2
-                resulLabel.text =  resulLabel.text + "\n" + String(format: "%.0f", result)
-            }
-            if oper == "-"{
-                result = numb1 - numb2
-                resulLabel.text = String(format: "%.0f", result)
-            }
-            else if oper == "/"{
-                result = numb1 / numb2
-                resulLabel.text = String(format: "%.0f", result)
-            }
-            else if oper == "x"{
-                result = numb1 * numb2
-                //resulLabel.text = String(format: "%.0f", result)\n String(numb1 "x" numb2)
-            }
-            else if oper == "AC"{
-                //result = .leastNonzeroMagnitude
-                //resulLabel.text = String(result)
-            }
+            calculoTotal()
+        }
+        else if sender.titleLabel?.text == "AC"{
+            resulLabel.text = ""
         }
         else{
-           numb1 = Double(resulLabel.text!) ?? 0.0
-            resulLabel.text = resulLabel.text + sender.titleLabel!.text!
-            oper = sender.titleLabel!.text!
+            resulLabel.text = resulLabel.text! + (sender.titleLabel?.text!)!
         }
   }
 }
