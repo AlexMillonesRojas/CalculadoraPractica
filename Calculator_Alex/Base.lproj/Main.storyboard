@@ -31,6 +31,9 @@
                                                 <state key="normal" title="AC">
                                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="operations:" destination="BYZ-38-t0r" eventType="touchUpInside" id="8rb-lA-Dw1"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pBE-Gb-TqP">
                                                 <rect key="frame" x="74" y="0.0" width="53.5" height="53.5"/>
@@ -334,20 +337,20 @@
                                     </stackView>
                                 </subviews>
                             </stackView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="50" translatesAutoresizingMaskIntoConstraints="NO" id="QOt-fy-594">
-                                <rect key="frame" x="20" y="159.5" width="280" height="0.0"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="100"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="right" translatesAutoresizingMaskIntoConstraints="NO" id="3Ph-jo-liL">
+                                <rect key="frame" x="42" y="37" width="240" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <string key="text">20
+4x5</string>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                                <fontDescription key="fontDescription" type="system" pointSize="52"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="cV0-yt-jsc" secondAttribute="bottom" constant="20" id="6rj-2l-FQT"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="QOt-fy-594" secondAttribute="trailing" constant="20" id="O3W-zw-vOJ"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="cV0-yt-jsc" secondAttribute="trailing" constant="20" id="T2g-pz-Pb5"/>
-                            <constraint firstItem="cV0-yt-jsc" firstAttribute="top" secondItem="QOt-fy-594" secondAttribute="bottom" constant="40" id="V0C-Ti-SxD"/>
-                            <constraint firstItem="QOt-fy-594" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="gaa-I5-eXA"/>
                             <constraint firstItem="cV0-yt-jsc" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="25" id="jRP-Ff-Dr7"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -372,7 +375,7 @@
                         <outlet property="operatorResult" destination="NjI-TY-KEb" id="wLt-3Z-bth"/>
                         <outlet property="operatorSubtraction" destination="ZCn-0c-r7H" id="b0a-5C-0nO"/>
                         <outlet property="operatorSum" destination="85Q-tO-0b2" id="2hx-ng-1s4"/>
-                        <outlet property="resulLabel" destination="QOt-fy-594" id="2da-5x-vTC"/>
+                        <outlet property="resulLabel" destination="3Ph-jo-liL" id="Ssm-An-mRF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
